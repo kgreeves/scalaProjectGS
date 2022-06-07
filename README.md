@@ -1,4 +1,1 @@
-# SCALA_FITEC
-# SCALA_FITEC
-# SCALA_FITEC
 # scalaProjectGS
