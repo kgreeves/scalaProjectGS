@@ -7,6 +7,7 @@ class Pilote(classement:Map[String,Int],nom:String, prenom:String, age:Int, voit
   val agePilot = age
   val nomPilot = nom
   val prenomPilote = prenom
+  val voiturePilote = voiture
 
   def dejaChampion(): Boolean = {
     classement.values.toSeq.contains(1)

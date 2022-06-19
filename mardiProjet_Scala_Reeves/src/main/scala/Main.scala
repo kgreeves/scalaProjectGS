@@ -35,11 +35,19 @@ object Main {
 
     // Générer la liste de pilotes
     val pilotList = new ListPilotes(MyList(pilotA,pilotB,pilotC))
+    println("Current length of pilot list : " + MyList.length(pilotList.pilotList))
+    val pilotD = new Pilote(piloteClassementMapCC,"DD","Dd",23,"Sport",1);
+    println("Adding Pilot D")
+    pilotList.ajouterPilot(pilotD)
+    println("Current length of pilot list : " + MyList.length(pilotList.pilotList))
 
+    // Filtrez par voiture
+    val carType:String = "Sport"
+    println("Pilotes avec une voiture " + carType + " : " + pilotList.filtreParVoiture(carType))
 
 
     //TEST MyList Methods
-//    val testList=MyList(1,2,3,4,5,19)
+    val testList=MyList(1,2,3,4,5,19)
 //    val testList2=MyList(6,7,8,9,10)
 //
 //    print(sum(testList))
@@ -54,31 +62,38 @@ object Main {
 //    val el:Int = 3
 //    println("Element " + el + " of testList is : " + MyList.get(el,testList))
 //
-//    println(testList)
-//    println("Drop While x  % 2 != 0 : " + MyList.dropWhile(testList,(x:Int)=>(x%2!=0)))
-//    println("Filter While x  % 2 != 0 : " + MyList.filter(testList,(x:Int)=>(x%2!=0)))
+/*
+    println(testList)
+    //println("Drop While x  % 3 != 0 : " + MyList.dropWhile(testList,(x:Int)=>(x%3!=0)))
+    val testList3:MyList[Int] = MyList.filter(testList,(x:Int)=>(x%2!=0))
+    println("Filter While x  % 2 != 0 : " + testList3)
+    println("And in reverse : " + MyList.reverse(testList3))
+
+    val testStringList: MyList[String] = MyList("this","is","a","test")
+    println("Filter While x==('test' or 'this') : " + MyList.filter(testStringList,
+                                                      (x:String)=>((x.equals("test") || x.equals("this")))))
+*/
 
 
+    /*    //EXCEPTIONS
+        //InvalidAgeException
+        println("Test Age of Pilot\n==================")
 
+        val pilotD = new Pilote(piloteClassementMapCC,"CCCCC","Ccccc",15,"Sport",18);
+        ////Method 1
+        //pilotD.validAge()
 
-    //EXCEPTIONS
-    //InvalidAgeException
-    println("Test Age of Pilot\n==================")
+        ////Method 2
+        def validateAge(pilot:Pilote): Try[Boolean] = {
+          Try(pilot.agePilot >= 18)
+        }
+        validateAge(pilotD) match {
+          case Success(true)  => println("Age OK")
+          case Success(false) => println(pilotD.prenomPilote + " " + pilotD.nomPilot +
+            " est trop jeune ! Il/elle n'a que " + pilotD.agePilot +" ans !")
+        }*/
 
-    val pilotD = new Pilote(piloteClassementMapCC,"CCCCC","Ccccc",15,"Sport",18);
-    ////Method 1
-    //pilotD.validAge()
-
-    ////Method 2
-    def validateAge(pilot:Pilote): Try[Boolean] = {
-      Try(pilot.agePilot >= 18)
-    }
-    validateAge(pilotD) match {
-      case Success(true)  => println("Age OK")
-      case Success(false) => println(pilotD.prenomPilote + " " + pilotD.nomPilot +
-        " est trop jeune ! Il/elle n'a que " + pilotD.agePilot +" ans !")
-    }
-
+/*
     //SpeedRangeException
     println("\nTest Speed Range of Cars\n==================")
 
@@ -107,6 +122,7 @@ object Main {
       case Success(false) => println(s"The speed of the ${carSuperSportA.nomCar} car (${carSuperSportA.vitesse}km/h) car exceeds the allowed maximum !")
     }
 
+*/
 
 
   }

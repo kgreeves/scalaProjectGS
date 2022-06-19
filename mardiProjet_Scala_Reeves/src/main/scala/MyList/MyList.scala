@@ -1,4 +1,6 @@
 package MyList
+import pilote.Pilote
+
 import scala.annotation.tailrec
 
 
@@ -95,30 +97,27 @@ object MyList { // `List` companion object. Contains functions for creating and 
 
   def filter[A](l: MyList[A], f: A => Boolean): MyList[A] = {
 
-    var tempListe:MyList[A] = MyList()
+    //var tempListe: MyList[A] = MyList()
+    @tailrec
+    def auxFunc(l: MyList[A], f: A => Boolean, pt: Int, tempListe: MyList[A]): MyList[A] = l match {
 
-    def auxFunc(l: MyList[A], f: A => Boolean, pt:Int, tempListe:MyList[A],longeur:Int): MyList[A] =  {
+      case Nil => tempListe
 
+      case Cons(x, tail) => {
 
-        if ((f(head(l)) == true) && (pt < longeur)) {
-          println(head(l))
-          println(tempListe)
-          println(pt.toString + "/" + longeur)
-          //println(tempListe2)
-          auxFunc(tail(l), f, pt+1, Cons(head(l),tempListe), longeur)
+        if ((f(x) == true)) {
+          auxFunc(tail, f, pt + 1, Cons(x, tempListe))
         }
-        else if (!f(head(l)) && (pt < length(l))) {
-          println(head(l))
-          println(tempListe)
-          println(pt.toString + "/" + longeur)
-          auxFunc(tail(l), f, pt+1, tempListe, longeur)
+        else {
+          auxFunc(tail, f, pt + 1, tempListe)
         }
-
-      tempListe
+      }
     }
-    auxFunc(l,f,0,MyList(),length(l))
 
-  }
+        auxFunc(l, f, 0, Nil)
+
+    }
+
 
          def init[A](l: MyList[A]): MyList[A] = ???
 
@@ -133,7 +132,18 @@ object MyList { // `List` companion object. Contains functions for creating and 
            countElements(l,0)
          }
 
-         def reverse[A](l: MyList[A]): MyList[A] = ???
+  def reverse[A](l: MyList[A]): MyList[A] = {
+    @tailrec
+    def appendRec(l: MyList[A], tempList : MyList[A]): MyList[A] = {
+      l match {
+        //case MyList.Nil => tempList
+        case Nil => tempList
+        case Cons(x, tail) => appendRec(tail, Cons(x,tempList))
+      }
+    }
+    appendRec(l,Nil)
+  }
+
 
   def getRandom[A](l: MyList[A]): A = {
     val randomNumber = scala.util.Random
@@ -143,6 +153,22 @@ object MyList { // `List` companion object. Contains functions for creating and 
   def get[A](n: Int, ls: MyList[A]): A  = {
     if ( n <= 1) head(ls)
     else get(n-1,tail(ls))
+  }
+
+
+ // For ListPilotes
+  def echoListeFiltre(l:MyList[Pilote]) : Unit = {
+
+    @tailrec
+    def auxFunc(l: MyList[Pilote]): Unit = l match {
+
+      case Nil => println("")
+      case Cons(head:Pilote, tail) => {
+        println(head.prenomPilote + " " + head.nomPilot)
+        auxFunc(tail)
+      }
+    }
+    auxFunc(l)
   }
 
 
